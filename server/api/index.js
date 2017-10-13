@@ -1,10 +1,10 @@
 import { Router } from 'express'
 
-import users from './users'
+import yelp from './yelp'
 
 const router = Router()
 
 // Add USERS Routes
-router.use(users)
+router.use(yelp)
 
 export default router

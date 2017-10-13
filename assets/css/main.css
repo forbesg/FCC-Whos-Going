@@ -1,11 +1,15 @@
 html, body
 {
-  background-color: #fff;
+  background-color: #D6D5C9;
   color: #000;
   letter-spacing: 0.5px;
   font-family: "Source Sans Pro", Arial, sans-serif;
   height: 100vh;
   margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #A22C29;
 }
 
 footer
@@ -20,9 +24,41 @@ a, a:hover, a:focus, a:visited
   color: #000;
 }
 
+.btn {
+  background-color: #B9BAA3;
+  border: 1px solid #909090;
+  border-radius: 5px;
+  color: #0A100D;
+  cursor: pointer;
+  font-size: 24px;
+  margin: 10px;
+  padding: 5px 10px;
+  transition: background-color 0.2s linear;
+}
+.btn:hover {
+  background-color: #a3a581;
+
+}
+
+.btn i.fa {
+  color: #000;
+} 
+
 .logo {
-  width: 100%;
   height: auto;
   max-width: 400px;
-  max-height: 289px;
+}
+
+.container {
+  max-width: 1020px;
+  margin: auto;
+  padding: 0 10px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.fa {
+  color: #b9baa3;
 }
