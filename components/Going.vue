@@ -2,8 +2,6 @@
   <div class="going">
     <button v-if="$store.state.user" class="btn" @click="handleButton">Going? {{ going.length }}</button>
     <a v-if="!$store.state.user" class="btn" href="/auth/twitter">Going? {{ going.length }}</a>
-    <p style="color: #fff;">{{alreadyGoing}}</p>
-    
   </div>
 </template>
 
