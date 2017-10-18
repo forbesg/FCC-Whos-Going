@@ -29,11 +29,9 @@ const store = () => new Vuex.Store({
   },
   actions: {
     nuxtServerInit ({ commit, fetch, state }, { req }) {
-      console.log(req.session, req.user)
       if (req.user) {
         commit('UPDATE_USER', req.user)
       }
-      console.log(state)
     },
     addCity ({ commit }, city) {
       commit('ADD_CITY', city)

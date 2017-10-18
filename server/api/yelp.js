@@ -43,7 +43,6 @@ router.get('/yelp/:city', function (req, res, next) {
   
   CurrentBars.findOne({city: cityName}).then(bars => {
     // if city search is not in the DB, request from Yelp, save to DB and return
-    console.log(bars)
     if (!bars) {
       getAccessToken().then(response => {
         if (response.data.error) throw newError(response.data.error)
@@ -129,7 +128,6 @@ router.post('/add-to-going/:barId', bodyParser.json(), (req, res) => {
         console.log(err)
         return res.send({error: 'Error adding you to this bar.'})
       }
-      console.log(doc)
       res.send(doc)
     }
   )
@@ -147,7 +145,6 @@ router.delete('/add-to-going/:barId', bodyParser.json(), (req, res) => {
         console.log(err)
         return res.send({error: 'Error removing you from this bar.'})
       }
-      console.log(doc)
       res.send(doc)
     }
   )

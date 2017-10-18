@@ -39,20 +39,21 @@ a, a:hover, a:focus, a:visited
 }
 
 .btn {
-  background-color: #B9BAA3;
-  border: 1px solid #909090;
+  background-color: #1c8adb;
+  border: 1px solid #2a7db9;
   border-radius: 5px;
-  color: #0A100D;
+  color: #ffffff;
   cursor: pointer;
   display: inline-block;
   font-size: 24px;
   margin: 10px;
+  outline: none;
   padding: 5px 10px;
   text-decoration: none;
   transition: background-color 0.2s linear;
 }
 .btn:hover {
-  background-color: #a3a581;
+  background-color: #2a7db9;
 }
 
 .btn i.fa {
@@ -75,5 +76,5 @@ a, a:hover, a:focus, a:visited
 }
 
 .fa {
-  color: #b9baa3;
+  color: #1c8adb;
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="going">
-    <button v-if="$store.state.user" class="btn" @click="handleButton">Going? {{ going.length }}</button>
-    <a v-if="!$store.state.user" class="btn" href="/auth/twitter">Going? {{ going.length }}</a>
+    <button v-if="$store.state.user" class="btn" @click="handleButton">Going{{ alreadyGoing ? '' : '?' }} <span class="count">{{ going.length }}</span></button>
+    <a v-if="!$store.state.user" class="btn" href="/auth/twitter">Going? <span class="count">{{ going.length }}</span></a>
   </div>
 </template>
 
@@ -40,8 +40,23 @@ export default {
   .btn {
     background-color: #fff;
     border: 1px solid #444;
+    color: #000;
     cursor: pointer;
-    padding: 10px 20px;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .count {
+      background-color: #a22c29;
+      color: #fff;
+      border-radius: 50%;
+      display: inline-block;
+      font-size: 0.6em;
+      margin-left: 30px;
+      width: 26px;
+      height: 26px;
+      line-height: 26px;
+    }
   }
 </style>
 

@@ -16,7 +16,7 @@
             </address> 
           </div>
           <p><i class="fa fa-phone fa-fw"></i> <a :href="`tel:${bar.phone}`">{{bar.display_phone}}</a></p>
-          <p>Open: <span v-if="bar.is_closed">Closed</span><span v-if="!bar.is_closed">Open</span></p>
+          <p>{{ bar.is_closed ? 'Currently Closed' : 'Open Now' }}</p>
           <hr>
           <div v-if="reviews" class="reviews">
             <h4>Reviews</h4>
