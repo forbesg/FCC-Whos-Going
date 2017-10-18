@@ -180,8 +180,8 @@ export default {
         }
         .going {
           position: absolute;
-          bottom: 10px;
-          right: 20px;
+          bottom: 0;
+          right: 0;
         }
       }
       .modal-content {
