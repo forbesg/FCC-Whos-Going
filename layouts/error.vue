@@ -1,20 +1,27 @@
 <template>
-  <section class="container">
-    <img src="../assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
-    <h1 class="title">
-      {{ error.statusCode }}
-    </h1>
-    <h2 class="info">
-      {{ error.message }}
-    </h2>
-    <nuxt-link class="button" to="/" v-if="error.statusCode === 404">
-      Homepage
-    </nuxt-link>
-  </section>
+  <div class="error">
+    <fg-header></fg-header>
+    <section class="container text-center">
+      <img src="../assets/img/logo.png" alt="Who's Going? Logo" class="logo" />
+      <h1 class="title">
+        {{ error.statusCode }}
+      </h1>
+      <h2 class="info">
+        {{ error.message }}
+      </h2>
+      <nuxt-link class="button" to="/" v-if="error.statusCode === 404">
+        Homepage
+      </nuxt-link>
+    </section>
+  </div>
 </template>
 <script>
+import Header from '~/components/Header'
 export default {
-  props: ['error']
+  props: ['error'],
+  components: {
+    'fg-header': Header
+  }
 }
 </script>
 

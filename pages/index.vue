@@ -1,7 +1,7 @@
 <template>
   <section class="container text-center">
     <h1 class="title">
-      Who's Going?
+      Who's Going? {{$store.state.city}}
     </h1>
     <div class="search-form">
       <form @submit="handleCitySearch">
@@ -18,10 +18,10 @@
         {{error}}
       </div>
     </div>
-    <div class="results" v-if="results">
-      <Listing v-for="result in results" :listing="result" :handleModalOpen="handleModalOpen" :key="result.id"/>
+    <div class="results" v-if="$store.state.bars">
+      <Listing v-for="(bar, index) in $store.state.bars" :listing="bar" :index="index" :handleModalOpen="handleModalOpen" :key="bar.id" />
     </div>
-    <Modal v-if="bar" :bar="bar" :handleModalOpen="handleModalOpen" />
+    <Modal v-if="$store.state.bars && $store.state.bars[barIndex]" :bar="$store.state.bars[barIndex]" :handleModalOpen="handleModalOpen" />
   </section>
 </template>
 
@@ -29,13 +29,13 @@
 import axios from '~/plugins/axios'
 import Listing from '~/components/Listing'
 import Modal from '~/components/Modal'
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
       city: null,
       error: null,
-      results: null,
-      bar: null,
+      barIndex: null,
       loading: false
     }
   },
@@ -43,10 +43,21 @@ export default {
     Listing,
     Modal
   },
+  fetch ({ store, req }) {
+    const city = req.session.currentLocation
+    if (city) {
+      return axios.get(`/api/yelp/${city}`).then(response => {
+        if (response.data.bars) {
+          store.commit('ADD_CITY', city)
+          store.commit('ADD_BARS', response.data.bars)
+        }
+      })
+    }
+  },
   methods: {
     handleCitySearch (e) {
       e.preventDefault()
-      this.results = null
+      this.removeBars()
       this.error = null
       if (!this.city) {
         this.error = 'Please enter a City in the Search bar'
@@ -54,21 +65,34 @@ export default {
       }
       this.loading = true
       axios.get(`/api/yelp/${this.city}`).then(results => {
-        this.results = results.data
+        // Check for err object on response
+        if (results.data.error) {
+          this.loading = false
+          this.error = results.data.error
+          return
+        }
+        this.addCity(results.data.city)
+        this.addBars(results.data.bars)
         this.loading = false
       }).catch(err => {
         console.log(err)
         this.error = 'There was an error, please check your connection'
       })
     },
-    handleModalOpen (bar) {
+    handleModalOpen (barIndex) {
+      const bar = this.$store.state.bars[barIndex]
       if (bar) {
-        this.bar = bar
+        this.barIndex = barIndex
         return
       }
-      console.log('closing modal')
-      this.bar = null
-    }
+      // Reset Bar on Modal Close
+      this.barIndex = null
+    },
+    ...mapActions({
+      addCity: 'addCity',
+      addBars: 'addBars',
+      removeBars: 'removeBars'
+    })
   }
 }
 </script>

@@ -6,13 +6,21 @@
     <div class="title">
       <h1>Who's Going?</h1>
     </div>
-    <div class="user"></div>
+    <div class="user">
+      <p v-if="$store.state.user">{{ $store.state.user.name }}</p>
+      <a href="/logout" v-if="$store.state.user">Logout</a>
+    </div>
   </header>
 </template>
 
 <script>
 export default {
-  name: 'fg-header'
+  name: 'fg-header',
+  methods: {
+    handleLogout () {
+
+    }
+  }
 }
 </script>
 
