@@ -1,7 +1,15 @@
 import passport from 'passport'
 import { Strategy } from 'passport-twitter'
 import User from '../models/users'
-import config from './config'
+
+// Enable config import in development
+// import config from './config'
+
+const config = {
+  consumerKey: process.env.TWITTER_CONSUMER_KEY,
+  consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+  callbackURL: `${process.env.HOSTNAME}auth/twitter/callback`
+}
 
 passport.use(new Strategy(config, function (token, tokenSecret, profile, done) {
   User.findOne({id: profile.id}).then(user => {
